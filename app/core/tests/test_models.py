@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 
+from core import models
 
 class ModelTests(TestCase):
 
@@ -36,3 +37,12 @@ class ModelTests(TestCase):
         )
         self.assertTrue(user.is_superuser)
         self.assertTrue(user.is_staff)
+
+    def test_add_in_wait_list(self):
+        """Test adding in wait list"""
+        user = models.WaitList.objects.create(
+            email='iwantin@example.com',
+            name='Carl Pie',
+        )
+
+        self.assertEqual(str(user), user.name)
